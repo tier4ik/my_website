@@ -63,8 +63,16 @@ function welcome() {
     function navigationAppear() {
         Velocity($('.navigation__elem'), {opacity: 1});
         Velocity(navTopEl, {top: 0});
-        Velocity(navBottomEl, {top: 0});
-    }            
+        Velocity(navBottomEl, {top: 0}, {complete: ()=> applyHover()});
+    } 
+    
+    function applyHover() {
+        $('.navigation__elem').hover(function() {
+            Velocity($('#hover'), "fadeIn");
+        }, function() {
+            Velocity($('#hover'), "fadeOut");
+        });
+    }
 }
 
 module.exports = {

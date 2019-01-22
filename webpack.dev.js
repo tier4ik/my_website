@@ -5,7 +5,8 @@ const webpack = require('webpack');
 module.exports = {
     mode: 'development',
     entry: {
-        welcomePage: './src/index.js'
+        index: './src/index.js',
+        projects: './src/js/projects.js'
     },
     output: {
         filename: '[name].js',
@@ -21,7 +22,13 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: './src/pug_templates/welcome.pug'
+            template: './src/pug_templates/welcome.pug',
+            chunks: ['index']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'projects.html',
+            template: './src/pug_templates/projects.pug',
+            chunks: ['projects']
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
@@ -51,6 +58,13 @@ module.exports = {
                 options: {
                     outputPath: 'images'
                 }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             },
             {
                 test: /\.(sass|scss)$/,
