@@ -1,4 +1,5 @@
 @import './var.sass'
+@import '~gemini-scrollbar/gemini-scrollbar.css'
 .container 
     position: relative
     width: 100%
@@ -28,18 +29,29 @@
         color: $orange
         height: 10%
     &__box
+        overflow: hidden
         height: 90%
-        display: flex
     &__list
-        position: relative
         list-style: none
+        display: flex
+        flex-direction: column
     &__elem
         height: 140px
         border: 2px solid $orange
         border-radius: 10px
         width: 400px//test
         margin: 6px 0 10px
+    &__img
+        height: 98%
+        width: auto
 .animation
     &__header
         @extend .html__header
         text-align: right
+    &__box
+        @extend .html__box
+    &__list
+        @extend .html__list
+        align-items: flex-end
+    &__elem
+        @extend .html__elem
