@@ -10,4 +10,5 @@ $(window).on('load', ()=> {
     var myScrollbar = new GeminiScrollbar({
         element: document.querySelector('.html__box')
     }).create();
+    console.log($('img').length);
 });
