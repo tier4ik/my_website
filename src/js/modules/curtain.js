@@ -1,10 +1,8 @@
 function curtainGo() {
-    var $liHtml = $('.html__elem');
-    var $liAnim = $('.animation__elem');
-    var i = 0;
-    var j = 0;
     var leftPart = $('.container__html');
     var rightPart = $('.container__animation');
+    var i = 0;
+    var $li = $('li');
 //
     Velocity(leftPart, {
         left: 0
@@ -19,41 +17,24 @@ function curtainGo() {
         duration: 1000,
         easing: 'easeInCirc',
         complete: ()=> {
-            cascadeLiHtml(i);
-            cascadeLiAnim(j);
+            cascadeLi(i);
         }
     });
 //
-    
-    function cascadeLiHtml(ind) {
-        if($liHtml.eq(ind) == undefined) return false;
-        Velocity($liHtml.eq(ind), {
-            opacity: 1
-        }, {
-            duration: 1000,
-            progress: (elems, complete, remaining, start, tweenValue)=> {
-                if(remaining >= 600) {
+    function cascadeLi(ind) {
+        var t1 = new TimelineMax();
+        if(ind < $li.length) {
+            t1
+                .to($li.eq(ind), 0.8, {css: {opacity: 1}})
+                .addCallback(()=> {
+                    console.log(ind);
                     ind++;
-                    cascadeLiHtml(ind);
-                }
-            }
-        });
-    }
-    function cascadeLiAnim(ind) {
-        if($liAnim.eq(ind) == undefined) return false;
-        Velocity($liAnim.eq(ind), {
-            opacity: 1
-        }, {
-            duration: 1000,
-            progress: (elems, complete, remaining, start, tweenValue)=> {
-                if(remaining >= 600) {
-                    ind++;
-                    cascadeLiAnim(ind);
-                }
-            }
-        });
+                    cascadeLi(ind);
+                }, 0.05);
+        }
     }
 }
+
 
 module.exports = {
     curtainGo

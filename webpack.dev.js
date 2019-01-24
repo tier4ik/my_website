@@ -6,7 +6,8 @@ module.exports = {
     mode: 'development',
     entry: {
         index: './src/index.js',
-        projects: './src/js/projects.js'
+        projects: './src/js/projects.js',
+        links: './src/js/links.js'
     },
     output: {
         filename: '[name].js',
@@ -29,6 +30,11 @@ module.exports = {
             filename: 'projects.html',
             template: './src/pug_templates/projects.pug',
             chunks: ['projects']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'links.html',
+            template: './src/pug_templates/links.pug',
+            chunks: ['links']
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({

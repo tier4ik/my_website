@@ -1,5 +1,10 @@
 @import './var.sass'
 @import '~gemini-scrollbar/gemini-scrollbar.css'
+.back
+    left: auto
+    top: auto
+    right: 20px
+    bottom: 20px
 .container 
     position: relative
     width: 100%
@@ -44,12 +49,13 @@
         padding: 2px
         display: flex
         justify-content: space-between
-        background-color: lighten($black, 40%)
+        background-color: lighten($black, 14%)
         opacity: 0
     &__img
         height: 100%
         width: auto
-        border-radius: 8px
+        border-bottom-left-radius: 8px
+        border-top-left-radius: 8px
         display: inline-block
         vertical-align: middle
         position: relative
@@ -82,5 +88,13 @@
         @extend .html__elem
     &__link
         @extend .html__link
+        border-bottom-right-radius: 0
+        border-top-right-radius: 0
+        border-bottom-left-radius: 8px
+        border-top-left-radius: 8px
     &__img
-        @extend .html__img
+        @extend .html__img        
+        border-bottom-left-radius: 0
+        border-top-left-radius: 0
+        border-bottom-right-radius: 8px
+        border-top-right-radius: 8px
