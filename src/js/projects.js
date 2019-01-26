@@ -9,7 +9,9 @@ $(window).on('load', ()=> {
     $('body').css('opacity', 1);
     curtainGo();
 
-    var myScrollbar = new GeminiScrollbar({
-        element: document.querySelector('.html__box')
-    }).create();
+    if(window.innerWidth >= 576) {
+       var myScrollbar = new GeminiScrollbar({
+            element: document.querySelector('.html__box')
+        }).create(); 
+    }
 });

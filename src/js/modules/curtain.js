@@ -27,7 +27,6 @@ function curtainGo() {
             t1
                 .to($li.eq(ind), 0.8, {css: {opacity: 1}})
                 .addCallback(()=> {
-                    console.log(ind);
                     ind++;
                     cascadeLi(ind);
                 }, 0.05);

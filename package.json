@@ -3,23 +3,38 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "browserslist": [
+    "last 2her version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
   "scripts": {
-    "build": "webpack --config=webpack.dev.js",
-    "start": "webpack-dev-server --config=webpack.dev.js --open",
+    "start": "node server/server.js",
+    "build": "webpack --config=webpack.build.js",
+    "serve": "webpack-dev-server --config=webpack.dev.js --open",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "10.*.*"
   },
   "author": "Max tier4ik Shevchenko",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^9.4.6",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^2.1.0",
     "file-loader": "^3.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^1.2.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
@@ -30,6 +45,7 @@
     "gemini-scrollbar": "^1.5.3",
     "gsap": "^2.0.2",
     "jquery": "^3.3.1",
+    "socket.io": "^2.2.0",
     "velocity-animate": "^1.5.2"
   }
 }

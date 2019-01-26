@@ -1,42 +1,51 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtcractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: {
         index: './src/index.js',
         projects: './src/js/projects.js',
         links: './src/js/links.js'
     },
     output: {
-        filename: '[name].js',
+        filename: 'scripts/[name].[hash].js',
         path: path.resolve(__dirname + '/server/static')
     },
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './server/static/',
-        host: '192.168.0.233',
-        port: 3000,
-        hot: true
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                test: /\.js(\?.*)?$/i,
+                parallel: true
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
+        new CleanWebpackPlugin(['server/static']),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/pug_templates/welcome.pug',
             chunks: ['index']
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/projects.html',
+            filename: 'projects.html',
             template: './src/pug_templates/projects.pug',
             chunks: ['projects']
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/links.html',
+            filename: 'links.html',
             template: './src/pug_templates/links.pug',
             chunks: ['links']
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        new MiniCssExtcractPlugin({
+            filename: 'css/[name].css'
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
@@ -62,21 +71,24 @@ module.exports = {
                 test: /\.(jpg|png|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    outputPath: 'images'
+                    outputPath: (url, resourcePath, context)=> {
+                        if(/pg_images/.test(resourcePath)) {
+                            return `images/pages/${url}`;
+                        }
+                        return `images/${url}`;
+                    }                    
                 }
             },
             {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.(sass|scss)$/,
-                use: [
-                    'style-loader',
+                test: /\.(sa|sc|c)ss$/,
+                use: [{
+                        loader: MiniCssExtcractPlugin.loader,
+                        options: {
+                            publicPath: '../'
+                        }
+                    },
                     'css-loader',
+                    'postcss-loader',
                     {
                         loader: 'sass-loader',
                         options: {
