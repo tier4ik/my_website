@@ -27,12 +27,12 @@ module.exports = {
             chunks: ['index']
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/projects.html',
+            filename: 'projects.html',
             template: './src/pug_templates/projects.pug',
             chunks: ['projects']
         }),
         new HtmlWebpackPlugin({
-            filename: 'html/links.html',
+            filename: 'links.html',
             template: './src/pug_templates/links.pug',
             chunks: ['links']
         }),
