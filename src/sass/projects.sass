@@ -59,6 +59,7 @@
         display: inline-block
         vertical-align: middle
         position: relative
+        margin-right: 2px
     &__link
         display: block
         height: 100%
@@ -70,19 +71,23 @@
         font-size: 32px
         text-align: center
         line-height: 132px
-        transition: all .3s ease
+        transition: all .8s ease
         &:hover
             text-decoration: none
             color: inherit
-            width: 90px
+            width: 100%
 .animation
     &__header
         @extend .html__header
         text-align: right
     &__box
         @extend .html__box
+        &>.gm-scrollbar
+            right: 2px
+            left: auto
     &__list
         @extend .html__list
+        padding-right: 30px
         align-items: flex-end
     &__elem
         @extend .html__elem
@@ -93,10 +98,17 @@
         border-bottom-left-radius: 8px
         border-top-left-radius: 8px
     &__img
-        @extend .html__img        
+        @extend .html__img    
+        margin-left: 2px    
         border-bottom-left-radius: 0
         border-top-left-radius: 0
         border-bottom-right-radius: 8px
         border-top-right-radius: 8px
+.gm-scrollbar .thumb
+    background-color: $orange
+    &:hover, &:active
+        background-color: darken($orange, 15%)
+.gm-scrollbar.-horizontal
+    display: none
 
 @import './media.sass'

@@ -1,24 +1,27 @@
 const Velocity = require('velocity-animate/velocity.min.js');
-const io = require('socket.io-client/dist/socket.io.js');
 require('./sass/main.sass');
-var {promise} = require('./js/modules/greetings.js');
-
-var socket = io();
+const { greetings } = require('./js/modules/greetings.js');
 
 function applyHover() {
-    $('.navigation__elem').hover(function() {
-        Velocity($('#hover'), "fadeIn");
-    }, function() {
-        Velocity($('#hover'), "fadeOut");
-    });
+    if(window.innerWidth >= 576) {
+        $('.navigation__elem').hover(function() {
+            Velocity($('#hover'), "fadeIn");
+        }, function() {
+            Velocity($('#hover'), "fadeOut");
+        });
+    } 
+    $('body').removeClass('greetings-animation');
 }
 
 $(window).on('load', ()=>{
-    $('body').css('opacity', 1);
-    promise.then(()=> {
-       if(window.innerWidth >= 576) {
-            applyHover();
-        } 
-    });
+    const cookies = document.cookie;
+    const isFirstTime = cookies.indexOf('session_exist') === -1;
+    if(isFirstTime) {
+        document.cookie = "session_exist=true; max-age=3600; path=/";
+        $('body').addClass('greetings-animation').css('opacity', '1');
+        greetings(applyHover);
+    } else {
+        Velocity($('body'), {opacity: 1}, {duration: 500});
+    }
 });
 

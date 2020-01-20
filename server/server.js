@@ -1,20 +1,17 @@
-const express = require('express');
+// node core libraries
 const path = require('path');
+
+// side libraries
+const express = require('express');
+
+// server config
 const publicPath = path.join(__dirname + '/static');
-const http = require('http');
-var app = express();
-var server = http.createServer(app);
-const socketIo = require('socket.io');
-var port = process.env.PORT || 3000;
-const io = socketIo(server);
+const port = process.env.PORT || 8000;
+const app = express();
 
-
+// server middleware
 app.use(express.static(publicPath));
 
-io.on('connection', ()=> {
-    console.log('a user connected');
-});
-
-server.listen(port, ()=> {
+app.listen(port, ()=> {
     console.log('Server is running on port: ' + port);
 });
