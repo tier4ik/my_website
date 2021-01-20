@@ -43,7 +43,7 @@
     "bootstrap": "^4.4.1",
     "express": "^4.16.4",
     "gemini-scrollbar": "^1.5.3",
-    "gsap": "^2.0.2",
+    "gsap": "^3.6.0",
     "jquery": "^3.5.0",
     "velocity-animate": "^1.5.2"
   }
