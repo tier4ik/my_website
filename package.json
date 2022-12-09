@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "gemini-scrollbar": "^1.5.3",
     "gsap": "^2.0.2",
     "jquery": "^3.5.0",
